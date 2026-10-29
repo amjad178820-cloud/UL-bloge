@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University of Layyah | Student Blog</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--green:#075c46;--green2:#0b8061;--gold:#e9b949;
+--bg:#f5f7f6;--card:#fff;--text:#182923;
+--muted:#64746d;--border:#e0e8e3;
+}
+body.dark{
+--bg:#101a17;--card:#1b2923;--text:#f0f7f2;
+--muted:#b1c2b8;--border:#34473d;
+}
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:.25s}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.container{width:min(1120px,92%);margin:auto}
+.topline{background:#064735;color:white;text-align:center;padding:8px;font-size:13px}
+header{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:58px;height:58px;flex-shrink:0;border-radius:50%;overflow:hidden;border:3px solid var(--gold);background:white;display:flex;align-items:center;justify-content:center}
+.logo img{width:100%;height:100%;object-fit:contain;padding:2px}
+.brand h2{font-size:18px;line-height:1.3;color:var(--green)}
+body.dark .brand h2{color:#83d8b5}
+.brand small{font-size:11px;color:var(--muted)}
+nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+nav a{font-size:14px;font-weight:bold}
+nav a:hover{color:var(--green2)}
+.theme{border:1px solid var(--border);border-radius:25px;padding:10px 15px;background:var(--card);color:var(--text)}
+.hero{
+background:
+linear-gradient(90deg,rgba(3,45,34,.86),rgba(3,65,48,.35)),
+url("/images/Faculty-bdf81.jpg.jpeg")
+center center/cover no-repeat;
+color:white;padding:82px 0;min-height:520px;
+display:flex;align-items:center
+}
+.hero-content{max-width:800px}
+.eyebrow{color:var(--gold);font-size:14px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}
+.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.12;margin:15px 0}
+.hero p{max-width:650px;color:#f0f7f3;font-size:17px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{display:inline-block;padding:12px 19px;border:0;border-radius:7px;background:var(--green2);color:white;font-weight:bold}
+.btn.gold{background:var(--gold);color:#183c2e}
+.btn.outline{background:transparent;border:1px solid #ffffffa0;color:white}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:-28px;position:relative}
+.stat{background:var(--card);border:1px solid var(--border);padding:20px;border-radius:12px;text-align:center;box-shadow:0 5px 18px #00000008}
+.stat strong{display:block;color:var(--green2);font-size:24px}
+.stat span{font-size:13px;color:var(--muted)}
+section.content{padding:65px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:25px}
+.section-head h2{font-size:30px}
+.section-head p{color:var(--muted);font-size:14px}
+.searchbar{max-width:380px;width:100%}
+.searchbar input{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text)}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px}
+.filter{padding:8px 14px;border:1px solid var(--border);border-radius:22px;background:var(--card);color:var(--text);font-size:13px}
+.filter.active{background:var(--green);color:white;border-color:var(--green)}
+.posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.post{background:var(--card);border:1px solid var(--border);border-radius:13px;overflow:hidden;transition:.2s}
+.post:hover{transform:translateY(-4px);box-shadow:0 12px 28px #00000012}
+.post img{display:block;width:100%;height:190px;object-fit:cover;background:#dce9e0}
+.post-body{padding:19px}
+.tag{display:inline-block;font-size:11px;font-weight:bold;text-transform:uppercase;color:var(--green2);background:#dff4e9;padding:5px 9px;border-radius:20px}
+body.dark .tag{background:#244c3a;color:#b4f3ce}
+.post h3{font-size:19px;line-height:1.35;margin:12px 0 9px}
+.post p{font-size:14px;color:var(--muted)}
+.meta{font-size:12px;color:var(--muted);margin:12px 0}
+.read{background:none;border:0;color:var(--green2);font-weight:bold;padding:5px 0}
+body.dark .read{color:#83d8b5}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:30px}
+.about{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about img{width:100%;height:330px;object-fit:cover;border-radius:14px}
+.about h2{font-size:30px;margin:12px 0}
+.about p{color:var(--muted);margin:12px 0}
+.departments{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.dept{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 12px;text-align:center}
+.dept span{font-size:27px}
+.dept h3{font-size:14px;margin-top:9px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.contact-box{padding:25px;border-radius:12px;background:var(--card);border:1px solid var(--border)}
+.contact-box h3{margin-bottom:12px}
+.contact-box p{color:var(--muted);font-size:14px;margin:8px 0}
+form{display:grid;gap:12px}
+form input,form textarea{width:100%;padding:12px;border:1px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text)}
+form textarea{min-height:110px;resize:vertical}
+#formMessage{font-size:13px;color:var(--green2)}
+footer{background:#063d30;color:white;padding:28px 0;text-align:center}
+footer p{font-size:13px;color:#d4e7dc}
+footer a{color:#f0c85c}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:30;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.modal-content{background:var(--card);color:var(--text);width:min(650px,100%);max-height:85vh;overflow:auto;padding:25px;border-radius:14px}
+.modal-content img{width:100%;max-height:250px;object-fit:cover;border-radius:8px;margin:15px 0}
+.modal-top{display:flex;justify-content:space-between;gap:15px}
+.close{border:0;background:var(--border);color:var(--text);border-radius:7px;padding:7px 12px}
+@media(max-width:850px){
+.posts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.departments{grid-template-columns:repeat(3,minmax(0,1fr))}
+.nav{padding:12px 0;flex-wrap:wrap}
+nav{gap:13px}
+}
+@media(max-width:580px){
+.hero{padding:60px 0}
+.posts,.about-grid,.contact-grid{grid-template-columns:1fr}
+.departments{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stats{gap:7px}
+.stat{padding:13px 5px}
+.stat strong{font-size:19px}
+.stat span{font-size:11px}
+.section-head h2{font-size:25px}
+nav{width:100%;justify-content:space-between}
+nav a{font-size:12px}
+.brand h2{font-size:15px}
+.about img{height:240px}
+}
+</style>
+</head>
+
+<body>
+<div class="topline">STUDENT BLOG PROJECT · UNIVERSITY OF LAYYAH · PAKISTAN</div>
+
+<header>
+<div class="container nav">
+<a href="#home" class="brand">
+<div class="logo">
+<img src="/images/logo.png" alt="University of Layyah logo">
+</div>
+<div>
+<h2>University of Layyah</h2>
+<small>Campus & Student Blog</small>
+</div>
+</a>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#blog">Blog</a>
+<a href="#about">About</a>
+<a href="#departments">Departments</a>
+<a href="#contact">Contact</a>
+<button class="theme" id="themeBtn" onclick="toggleTheme()">🌙 Dark</button>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-content">
+<div class="eyebrow">Learn · Discover · Grow</div>
+<h1>Explore Campus Life at the University of Layyah</h1>
+<p>A student-focused blog sharing university information, academic life, educational opportunities and campus stories from Layyah.</p>
+<div class="hero-buttons">
+<a class="btn gold" href="#blog">Explore Blog Posts →</a>
+<a class="btn outline" href="#about">Discover Our University</a>
+</div>
+</div>
+</section>
+
+<div class="container stats">
+<div class="stat"><strong>Education</strong><span>Knowledge for the future</span></div>
+<div class="stat"><strong>Campus Life</strong><span>Learn beyond classrooms</span></div>
+<div class="stat"><strong>Community</strong><span>Growing together</span></div>
+</div>
+
+<section class="content" id="blog">
+<div class="container">
+<div class="section-head">
+<div>
+<div class="eyebrow">From the campus</div>
+<h2>Latest Blog Posts</h2>
+<p>Explore articles, student resources and university life.</p>
+</div>
+<div class="searchbar">
+<input id="searchInput" type="search" placeholder="Search blog posts..." aria-label="Search blog posts">
+</div>
+</div>
+
+<div class="filters" id="filters">
+<button class="filter active" data-category="All">All Posts</button>
+<button class="filter" data-category="Campus">Campus Life</button>
+<button class="filter" data-category="Education">Education</button>
+<button class="filter" data-category="Students">Student Guide</button>
+<button class="filter" data-category="Technology">Technology</button>
+</div>
+<div class="posts" id="posts"></div>
+</div>
+</section>
+
+<section class="content about" id="about">
+<div class="container about-grid">
+<div>
+<div class="eyebrow">About the university</div>
+<h2>A Place for Learning and Opportunity</h2>
+<p>The University of Layyah is a public university in Layyah, Punjab, Pakistan.</p>
+<p>This student blog is an educational project designed to present campus information and useful student articles in a simple format.</p>
+<a class="btn" href="https://ul.edu.pk/" target="_blank" rel="noopener">Official University Website ↗</a>
+</div>
+<img src="/images/building.jpg" alt="University campus building" loading="lazy">
+</div>
+</section>
+
+<section class="content" id="departments">
+<div class="container">
+<div class="section-head">
+<div>
+<div class="eyebrow">Academic community</div>
+<h2>Faculties & Study Areas</h2>
+<p>Explore academic areas and student learning opportunities.</p>
+</div>
+</div>
+<div class="departments">
+<div class="dept"><span>💻</span><h3>Computing & Engineering</h3></div>
+<div class="dept"><span>🌱</span><h3>Agricultural Sciences</h3></div>
+<div class="dept"><span>🔬</span><h3>Natural Sciences</h3></div>
+<div class="dept"><span>🐾</span><h3>Veterinary Sciences</h3></div>
+<div class="dept"><span>📚</span><h3>Management & Humanities</h3></div>
+</div>
+</div>
+</section>
+
+<section class="content about" id="contact">
+<div class="container">
+<div class="section-head">
+<div>
+<div class="eyebrow">Get in touch</div>
+<h2>Contact & Feedback</h2>
+<p>Have a question or a suggestion for the student blog?</p>
+</div>
+</div>
+
+<div class="contact-grid">
+<div class="contact-box">
+<h3>University Information</h3>
+<p>📍 Layyah, Punjab, Pakistan</p>
+<p>🌐 <a href="https://ul.edu.pk/" target="_blank" rel="noopener">Official University Website</a></p>
+<p><strong>Project note:</strong> This is a student-created demo blog, not an official university communication channel.</p>
+</div>
+<div class="contact-box">
+<h3>Send Feedback</h3>
+<form id="feedbackForm">
+<input id="name" type="text" placeholder="Your name" required>
+<input id="email" type="email" placeholder="Your email" required>
+<textarea id="message" placeholder="Write your message..." required></textarea>
+<button class="btn" type="submit">Submit Feedback</button>
+<p id="formMessage" aria-live="polite"></p>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container">
+<p><strong>University of Layyah — Student Blog Project</strong></p>
+<!--<p>Designed with HTML, CSS & JavaScript · Made by Haider/Kashif</p>-->
+<p>For official information, visit <a href="https://ul.edu.pk/">ul.edu.pk</a></p>
+<p>© <span id="year"></span> Student Blog Demo</p>
+</div>
+</footer>
+
+<div class="modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-content">
+<div class="modal-top">
+<div><div class="eyebrow">Blog article</div><h2 id="modalTitle"></h2></div>
+<button class="close" onclick="closeArticle()" aria-label="Close article">✕</button>
+</div>
+<img id="modalImage" src="" alt="">
+<p id="modalMeta" class="meta"></p>
+<p id="modalText"></p>
+</div>
+</div>
+
+<script>
+const articles=[
+{id:1,category:"Campus",date:"Student Guide",title:"Making the Most of University Life",image:"https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80",excerpt:"University life is about more than lectures. Discover ways to participate, build friendships and make your campus experience meaningful.",body:"University life offers opportunities to develop academic knowledge, communication skills and lasting friendships. Attend classes regularly, participate in group activities and learn to manage your time. Explore student societies and educational events when available. Be respectful, stay curious and ask teachers for help whenever you need it."},
+{id:2,category:"Education",date:"Study Tips",title:"Five Habits for Better Academic Results",image:"https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",excerpt:"Build a realistic study routine, revise regularly and use your time wisely to improve your learning.",body:"Plan your weekly classes, assignments and deadlines. Divide large tasks into smaller steps. Review your notes regularly, practise recalling concepts and study in focused sessions with short breaks. Ask questions when something is unclear. Consistent effort helps you learn more effectively."},
+{id:3,category:"Students",date:"Student Guide",title:"A Beginner's Guide to University Assignments",image:"https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",excerpt:"Learn how to understand assignment requirements, organise research and submit your work confidently.",body:"Read assignment instructions carefully. Identify the required format, deadline and marking criteria. Create an outline, gather trustworthy references and write in your own words. For coding projects, test your work and include all required files. Keep a backup and verify your submitted links."},
+{id:4,category:"Technology",date:"Digital Skills",title:"Why Every Student Should Learn Web Development",image:"https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",excerpt:"HTML, CSS and JavaScript help students turn ideas into interactive websites and useful projects.",body:"HTML structures a webpage, CSS controls its appearance and JavaScript adds interactive behaviour. Start with a personal webpage, calculator or student blog. Practise small features, test your work in a browser and save projects on GitHub."},
+{id:5,category:"Campus",date:"Campus Life",title:"The Importance of Libraries in Student Life",image:"https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80",excerpt:"Libraries support independent learning, research and focused study beyond the classroom.",body:"Libraries provide places for quiet study, reading and research. Make a list of the information you need before starting research. Record your sources so that you can cite them properly in assignments. Follow library rules and keep the environment welcoming."},
+{id:6,category:"Education",date:"Career Advice",title:"Preparing for Your Future Career While Studying",image:"https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80",excerpt:"Develop communication, teamwork and practical skills alongside your academic studies.",body:"Build a clear CV, practise explaining your projects and improve communication skills. Complete practical assignments and create a portfolio. Learn to work in a team and research the skills required for your preferred career."}
+];
+
+const postsContainer=document.getElementById("posts");
+const searchInput=document.getElementById("searchInput");
+const filters=document.getElementById("filters");
+let selectedCategory="All";
+
+function renderPosts(){
+const query=searchInput.value.trim().toLowerCase();
+const filtered=articles.filter(article=>{
+const matchesCategory=selectedCategory==="All"||article.category===selectedCategory;
+const text=(article.title+" "+article.excerpt+" "+article.category+" "+article.body).toLowerCase();
+return matchesCategory&&text.includes(query);
+});
+postsContainer.innerHTML="";
+if(!filtered.length){
+postsContainer.innerHTML='<p class="empty">No posts found. Try a different search.</p>';
+return;
+}
+filtered.forEach(article=>{
+const card=document.createElement("article");
+card.className="post";
+const img=document.createElement("img");
+img.src=article.image;img.alt=article.title;img.loading="lazy";
+const body=document.createElement("div");body.className="post-body";
+const tag=document.createElement("span");tag.className="tag";tag.textContent=article.category;
+const title=document.createElement("h3");title.textContent=article.title;
+const excerpt=document.createElement("p");excerpt.textContent=article.excerpt;
+const meta=document.createElement("div");meta.className="meta";meta.textContent=article.date;
+const read=document.createElement("button");read.className="read";read.textContent="Read More →";
+read.addEventListener("click",()=>openArticle(article.id));
+body.append(tag,title,excerpt,meta,read);card.append(img,body);postsContainer.appendChild(card);
+});
+}
+
+filters.addEventListener("click",event=>{
+const button=event.target.closest("button[data-category]");
+if(!button)return;
+selectedCategory=button.dataset.category;
+filters.querySelectorAll(".filter").forEach(item=>item.classList.toggle("active",item===button));
+renderPosts();
+});
+searchInput.addEventListener("input",renderPosts);
+
+function openArticle(id){
+const article=articles.find(item=>item.id===id);
+if(!article)return;
+document.getElementById("modalTitle").textContent=article.title;
+document.getElementById("modalImage").src=article.image;
+document.getElementById("modalImage").alt=article.title;
+document.getElementById("modalMeta").textContent=article.category+" · "+article.date;
+document.getElementById("modalText").textContent=article.body;
+document.getElementById("articleModal").classList.add("show");
+document.body.style.overflow="hidden";
+document.querySelector(".close").focus();
+}
+function closeArticle(){
+document.getElementById("articleModal").classList.remove("show");
+document.body.style.overflow="";
+}
+document.getElementById("articleModal").addEventListener("click",event=>{
+if(event.target.id==="articleModal")closeArticle();
+});
+document.addEventListener("keydown",event=>{
+if(event.key==="Escape")closeArticle();
+});
+function toggleTheme(){
+document.body.classList.toggle("dark");
+const dark=document.body.classList.contains("dark");
+document.getElementById("themeBtn").textContent=dark?"☀️ Light":"🌙 Dark";
+}
+document.getElementById("feedbackForm").addEventListener("submit",event=>{
+event.preventDefault();
+document.getElementById("formMessage").textContent="Demo only: your message was not sent. A backend is required to receive feedback.";
+event.target.reset();
+});
+document.getElementById("year").textContent=new Date().getFullYear();
+renderPosts();
+</script>
+</body>
+</html>
